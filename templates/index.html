@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body bgcolor="black">
+    <form action="/run" method="POST">
+        <!--<button type="submit" name="run_code">Run Code</button>-->
+    </form>
+    <a href="http://127.0.0.1:5000/stopServer">Stop</a>
+    <center>
+    <h1>Live Streaming</h1></center>
+    <!--<video id="video" autoplay="true"></video>-->
+    <script>
+      let video=document.getElementById("video");
+      navigator.mediaDevices.getUserMedia({video:true}).then(function(s){
+        video.srcObject=s;
+      })
+    </script>
+    <center>
+        <img src="{{url_for('video') }}" width="50%">
+  </center>
+     <script>
+    var button = document.getElementById('stop');
+    button.onclick = function() {
+      console.log("Stop")
+      fetch('/stop', { method: 'POST' });
+    };
+  </script>
+    </body>
+    
+</html>
